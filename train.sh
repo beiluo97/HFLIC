@@ -1,0 +1,1 @@
+nohup python train.py --metrics mse --exp elic_reproduce_mse_0800 --lambda 0.08 --gpu_id 4 -lr 1e-4 --clip_max_norm 1.0 -c experiments/elic_reproduce_mse_0800/checkpoints/checkpoint_002.pth.tar --seed 919 --batch-size 8 & > 0800v2.txt

@@ -1,0 +1,47 @@
+import torch
+import torch.nn as nn
+import torch.nn.functional as F
+from compressai.layers import subpel_conv3x3, AttentionBlock
+from modules.layers.conv import conv1x1, conv3x3, conv, deconv
+from modules.layers.res_blk import *
+
+class SynthesisTransformEX(nn.Module):
+    def __init__(self, N, M, act=nn.GELU) -> None:
+        super().__init__()
+        self.synthesis_transform = nn.Sequential(
+            AttentionBlock(M),
+            deconv(M, N),
+            ResidualBottleneck(N, act=act),
+            ResidualBottleneck(N, act=act),
+            ResidualBottleneck(N, act=act),
+            deconv(N, N),
+            AttentionBlock(N),
+            ResidualBottleneck(N, act=act),
+            ResidualBottleneck(N, act=act),
+            ResidualBottleneck(N, act=act),
+            deconv(N, N),
+            ResidualBottleneck(N, act=act),
+            ResidualBottleneck(N, act=act),
+            ResidualBottleneck(N, act=act),
+            deconv(N, 3)
+        )
+
+    def forward(self, x):
+        x = self.synthesis_transform(x)
+        return x
+
+
+class HyperSynthesisEX(nn.Module):
+    def __init__(self, N, M, act=nn.GELU) -> None:
+        super().__init__()
+        self.increase = nn.Sequential(
+            deconv(N, M),
+            act(),
+            deconv(M, M * 3 // 2),
+            act(),
+            deconv(M * 3 // 2, M * 2, kernel_size=3, stride=1),
+        )
+
+    def forward(self, x):
+        x = self.increase(x)
+        return x
