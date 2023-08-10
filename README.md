@@ -1,6 +1,6 @@
 # HFLIC
 This section contains the official code for Human Friendly Perceptual Learned Image Compression with Reinforced Transform. Additionally, it includes an unofficial implementation of the paper titled "PO-ELIC: Perception-Oriented Efficient Learned Image Coding." The code implementation is based on CompressAI.
-We share our enhance transform elic ckpt in [Enh-ELIC-ckpt](https://disk.pku.edu.cn:443/link/0C4548BF6A303EDBA16835CBC1405584), and modify the `config_5group.py` in `./config`, you can train HFLIC and Enh-POELIC with different lambda. 
+We share our enhance transform elic ckpt in [Enh-ELIC-ckpt](https://disk.pku.edu.cn:443/link/0C4548BF6A303EDBA16835CBC1405584), and modify the `config_5group.py` in `./config`, you can train HFLIC and Enh-POELIC with different lambda. We further share some of our code and lamda setting for ["EnhPO:ELIC" and "HFLIC"](https://disk.pku.edu.cn/#/link/5DB382C6C7D49AAC0AC2E4D7FE31E9A2)
 # PO:ELIC
 This section consists of an unofficial implementation of the paper titled "PO-ELIC: Perception-Oriented Efficient Learned Image Coding," which was presented at CVPR22W as the 1st place winner of CLIC22.
 ## How to train po:elic
